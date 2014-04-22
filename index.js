@@ -19,6 +19,15 @@ util.inherits(Dynector, events.EventEmitter);
 
 Dynector.prototype.token = null;
 
+Dynector.prototype.headers = function headers()
+{
+    var headers = {};
+    if (this.token)
+        headers['Auth-Token'] = this.token;
+
+    return headers;
+}
+
 
 // public API: all methods can either take a callback or return a promise
 
@@ -62,11 +71,17 @@ Dynector.prototype._login = function _login(credentials)
 };
 
 
+
+
+
 // promises wrapper for request
 Dynector.prototype.execute = function execute(opts)
 {
     var self = this,
         deferred = P.defer();
+
+    if (!opts.headers) opts.headers = {};
+    _.merge(opts.headers, this.headers());
 
     Request(opts, function(err, response, body)
     {
