@@ -1,0 +1,30 @@
+{
+  "name": "dynector",
+  "description": "DynECT dns API conveniences",
+  "version": "0.0.0",
+  "author": "C J Silverio <ceej@npmjs.com>",
+  "bugs": {
+    "url": "https://github.com/npm/dynector/issues"
+  },
+  "dependencies": {
+    "request": "^2.34.0"
+  },
+  "devDependencies": {
+    "lab": "^3.0.1",
+    "must": "^0.11.0"
+  },
+  "homepage": "https://github.com/npm/dynector",
+  "keywords": [
+    "dynect",
+    "dns"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/npm/dynector.git"
+  },
+  "scripts": {
+    "test": "lab -v test/test-*.js"
+  }
+}
