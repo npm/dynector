@@ -29,7 +29,7 @@ describe('Dynector', function()
 
     describe('login', function()
     {
-        it('login() demands the parameters dynect requires', function(done)
+        it('login() demands an options object', function(done)
         {
             function shouldThrow()
             {
@@ -41,6 +41,34 @@ describe('Dynector', function()
             done();
         });
 
+        it('login() demands the parameters dynect requires', function(done)
+        {
+            function shouldThrow1()
+            {
+                var client = new Dynector();
+                client.login({});
+            }
+
+            function shouldThrow2()
+            {
+                var client = new Dynector();
+                client.login({ customer_name: 'foo' });
+            }
+
+            function shouldThrow3()
+            {
+                var client = new Dynector();
+                client.login({ customer_name: 'foo', user_name: 'bar' });
+            }
+
+            shouldThrow1.must.throw(/customer_name/);
+            shouldThrow2.must.throw(/user_name/);
+            shouldThrow3.must.throw(/password/);
+
+            done();
+        });
+
+
         it('login() returns a promise if no callback is provided', function(done)
         {
             var client = new Dynector();
@@ -51,7 +79,7 @@ describe('Dynector', function()
             done();
         });
 
-        it('can log into dynect', function(done)
+        it('can log into dynect', { timeout: 5000 }, function(done)
         {
             var client = new Dynector();
             client.login(credentials, function(err, reply)
@@ -70,7 +98,7 @@ describe('Dynector', function()
         before(function(done)
         {
             client = new Dynector();
-            client.login(credentials).then(done);
+            client.login(credentials).then(done).done();
         });
 
         it('can fetch all zones', function(done)
@@ -82,7 +110,7 @@ describe('Dynector', function()
                 z.must.be.an.array();
                 z.length.must.be.above(0);
 
-                testzone = z[0];
+                testzone = z[z.length - 1];
 
                 done();
             }).done();
@@ -104,6 +132,28 @@ describe('Dynector', function()
                 done();
             }).done();
         });
+
+        it('can add a zone');
+        it('can add a CNAME record to a zone');
+        it('can add a A record to a zone');
+
+        it('can fetch the nodelist for a zone', function(done)
+        {
+            client.nodes(testzone)
+            .then(function(result)
+            {
+                result.must.be.an.array();
+                result.length.must.be.above(0);
+                result[0].must.be.a.string();
+
+                done();
+            }).done();
+        });
+
+        it('can remove a zone');
+
+        it('can review a pending changeset');
+        it('can publish a pending changeset');
 
     });
 });

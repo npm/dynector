@@ -27,6 +27,6 @@
     "url": "git://github.com/npm/dynector.git"
   },
   "scripts": {
-    "test": "lab -v test/test-*.js"
+    "test": "lab -v -c -t 75 test/test-*.js"
   }
 }

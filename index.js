@@ -14,6 +14,7 @@ var Dynector = module.exports = function Dynector(opts)
 {
     events.EventEmitter.call(this);
 
+    // anything else?
 };
 util.inherits(Dynector, events.EventEmitter);
 
@@ -34,9 +35,30 @@ Dynector.prototype.headers = function()
 
 // public API: all methods can either take a callback or return a promise
 
-Dynector.prototype.login = function login(credentials, callback) { return this._login(credentials).nodeify(callback); };
-Dynector.prototype.zones = function zones(callback) { return this._zones().nodeify(callback); };
-Dynector.prototype.zone = function zone(name, callback) { return this._zone(name).nodeify(callback); };
+Dynector.prototype.login = function login(credentials, callback)
+    { return this._login(credentials).nodeify(callback); };
+
+Dynector.prototype.zones = function zones(callback)
+    { return this._zones().nodeify(callback); };
+Dynector.prototype.zone = function zone(name, callback)
+    { return this._zone(name).nodeify(callback); };
+Dynector.prototype.addZone = function addZone(zone, settings, callback)
+    { return this._addZone(zone, settings).nodeify(callback); };
+
+Dynector.prototype.nodes = function nodes(zone, callback)
+    { return this._nodes(zone).nodeify(callback); };
+Dynector.prototype.deleteNode = function deleteNode(zone, fqdn, callback)
+    { return this._deleteNode(zone, fqdn).nodeify(callback); };
+Dynector.prototype.addARecord = function addARecord(zone, fqdn, address, ttl, callback)
+    { return this._nodes(zone, fqdn, address, ttl).nodeify(callback); };
+Dynector.prototype.addCNAME = function addCNAME(zone, fqdn, cname, ttl, callback)
+    { return this._nodes(zone, fqdn, cname, ttl).nodeify(callback); };
+
+// TODO:
+// add node
+// get changeset for zone
+
+Dynector.prototype.publish = function publish(zone, callback) { return this._publish(zone).nodeify(callback); };
 
 // run an arbitrary job not otherwise supported in the API
 Dynector.prototype.job = function job(options, callback) { return this._job(options).nodeify(callback); };
@@ -89,7 +111,6 @@ Dynector.prototype._zones = function _zones()
 
 Dynector.prototype._zone = function _zone(name)
 {
-    var self = this;
     var opts = { uri: BASE + 'Zone/' + name };
     if (opts.uri[opts.uri.length - 1] !== '/')
         opts.uri += '/';
@@ -100,6 +121,131 @@ Dynector.prototype._zone = function _zone(name)
         return result.data;
     });
 };
+
+Dynector.prototype._addZone = function _addZone(zone, settings)
+{
+    assert(settings && _.isObject(settings));
+    assert(settings.rname);
+    assert(settings.ttl);
+
+    var opts =
+    {
+        uri: BASE + 'Zone/' + zone,
+        method: 'POST',
+        json:
+        {
+            rname : settings.rname,
+            ttl   : settings.ttl,
+            serial_style: settings.serial_style
+        },
+    };
+    if (opts.uri[opts.uri.length - 1] !== '/')
+        opts.uri += '/';
+
+    return this._job(opts)
+    .then(function(result)
+    {
+        return result.data;
+    });
+};
+
+
+Dynector.prototype._nodes = function _nodes(name)
+{
+    var opts = { uri: BASE + 'NodeList/' + name };
+    if (opts.uri[opts.uri.length - 1] !== '/')
+        opts.uri += '/';
+
+    return this._job(opts)
+    .then(function(result)
+    {
+        return result.data;
+    });
+};
+
+
+Dynector.prototype._deleteNode = function _deleteNode(zone, fqdn)
+{
+    var opts =
+    {
+        uri: BASE + 'Node/' + zone + '/' + fqdn,
+        method: 'DELETE',
+    };
+    if (opts.uri[opts.uri.length - 1] !== '/')
+        opts.uri += '/';
+
+    return this._job(opts)
+    .then(function(result)
+    {
+        return result.data;
+    });
+};
+
+
+Dynector.prototype._addARecord = function _addARecord(zone, fqdn, address, ttl)
+{
+    var opts =
+    {
+        uri: BASE + 'ARecord/' + zone + '/' + fqdn,
+        method: 'POST',
+        json:
+        {
+            ttl   : ttl,
+            rdata : { address: address },
+        },
+    };
+    if (opts.uri[opts.uri.length - 1] !== '/')
+        opts.uri += '/';
+
+    return this._job(opts)
+    .then(function(result)
+    {
+        return result.data;
+    });
+};
+
+
+Dynector.prototype._addCNAME = function _addCNAME(zone, fqdn, cname, ttl)
+{
+    var opts =
+    {
+        uri: BASE + 'CNAMERecord/' + zone + '/' + fqdn,
+        method: 'POST',
+        json:
+        {
+            ttl   : ttl,
+            rdata : { cname: cname },
+        },
+    };
+    if (opts.uri[opts.uri.length - 1] !== '/')
+        opts.uri += '/';
+
+    return this._job(opts)
+    .then(function(result)
+    {
+        return result.data;
+    });
+};
+
+
+Dynector.prototype._publish = function _publish(zone)
+{
+    var opts =
+    {
+        uri: BASE + 'Zone/' + zone,
+        method: 'PUT',
+        json: { publish: true },
+    };
+    if (opts.uri[opts.uri.length - 1] !== '/')
+        opts.uri += '/';
+
+    return this._job(opts)
+    .then(function(result)
+    {
+        return result.data;
+    });
+};
+
 
 
 // promises wrapper for request
