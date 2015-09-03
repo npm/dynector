@@ -1,24 +1,33 @@
 {
   "name": "dynector",
-  "description": "DynECT dns API conveniences",
+  "description": "DynECT dns API command-line tool",
   "version": "0.0.0",
   "author": "C J Silverio <ceej@npmjs.com>",
+  "bin": {
+    "dynector": "index.js"
+  },
   "bugs": {
     "url": "https://github.com/npm/dynector/issues"
   },
   "dependencies": {
-    "bluebird": "^1.2.3",
-    "lodash": "^2.4.1",
-    "request": "^2.34.0"
+    "dyn-js": "~1.0.3",
+    "lodash": "~3.10.1",
+    "yargs": "~3.23.0"
   },
   "devDependencies": {
-    "lab": "^3.0.1",
-    "must": "^0.11.0"
+    "istanbul": "~0.3.19",
+    "jscs": "~2.1.1",
+    "jshint": "~2.8.0",
+    "mocha": "~2.3.0",
+    "mocha-lcov-reporter": "~0.0.2",
+    "must": "~0.12.0"
   },
   "homepage": "https://github.com/npm/dynector",
   "keywords": [
+    "dns",
     "dynect",
-    "dns"
+    "command-line",
+    "cli tool"
   ],
   "license": "ISC",
   "main": "index.js",
@@ -27,6 +36,7 @@
     "url": "git://github.com/npm/dynector.git"
   },
   "scripts": {
-    "test": "lab -v -c -t 75 test/test-*.js"
+    "coverage": "istanbul cover _mocha test --recursive -- -u exports -R spec && open coverage/lcov-report/index.html",
+    "test-suite": "mocha -R spec test/*.js"
   }
 }
