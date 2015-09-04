@@ -38,7 +38,7 @@
         "do"
     ],
     "requireNewlineBeforeBlockStatements": [
-        "else", "try", "catch", "finally", "do", "while", "function"
+        "else", "try", "catch", "finally", "do", "while"
     ],
     "requireSpaceAfterKeywords": [
         "if",
