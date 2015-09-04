@@ -3,6 +3,7 @@
 var
 	_      = require('lodash'),
 	assert = require('assert'),
+	chalk  = require('chalk'),
 	Dyn    = require('dyn-js'),
 	yargs  = require('yargs')
 		.usage('add and remove simple host records to DNS\n$0 --host foo.example.com -a 10.0.0.11')
@@ -54,27 +55,25 @@ assert(process.env.DYN_PASSWORD, 'you must set your dyn password in the DYN_CUST
 
 var logit = function logit(message)
 {
-	if (argv.silent) return;
-	console.log(message);
+	if (!argv.silent) console.log(message);
 };
 
 var addCName = function addCName(dyn, host, cname)
 {
-	logit('adding cname for ' + host + ': ' + cname);
+	logit('adding cname for ' + chalk.blue(host) + ': ' + chalk.green(cname));
 	return dyn.record._CNAME.create(host, { rdata: { cname: cname }});
 };
 
 var addARecord = function addARecord(dyn, host, ip)
 {
-	logit('creating A record for ' + host + ': ' + ip);
+	logit('creating A record for ' + chalk.blue(host) + ': ' + chalk.green(ip));
 	return dyn.record._A.create(host, { rdata: { address: ip }});
 };
 
-var deleteRecord = function deleteRecord(client, host)
+var deleteRecord = function deleteRecord(dyn, host)
 {
-	logit('removing host record: ' + host);
-	var subzone = client.traffic.withZone(host);
-	return subzone.zone.destroy(host, { rdata: { zone: host }});
+	logit(chalk.red('*** removing node: ') + chalk.blue(host) + chalk.red(' ***'));
+	return dyn.node.destroy(host, { rdata: { zone: host }});
 };
 
 var PATT = /\.(\w+)\.(\w+)$/;
@@ -91,7 +90,7 @@ logit('operating on zone ' + zone);
 if (zone === argv.host)
 {
 	console.error('zone is same as hostname! declining to let you shoot yourself in the foot.');
-	console.error('zone: ' + zone + '; host: ' + host);
+	console.error('zone: ' + zone + '; host: ' + argv.host);
 	process.exit(1);
 }
 
@@ -107,33 +106,31 @@ function loginAndAct(action)
 	dyn.session.create()
 	.then(function(r)
 	{
-		console.log(r);
 		return action();
 	})
 	.then(function(result)
 	{
-		console.log(result);
 		return dyn.zone.publish();
+
 	}).then(function(result)
 	{
-		console.log(result);
 		return dyn.session.destroy();
 	}).then(function(result)
 	{
-		console.log(result);
+		logit(chalk.green('Done!'));
 	}).catch(function(err)
 	{
-		console.log(err);
-	});
+		console.log(chalk.red(err));
+	}).done();
 }
 
 var action;
 if (argv.cname)
-	action = function() { addCName(dyn, argv.host, argv.cname); };
+	action = function() { return addCName(dyn, argv.host, argv.cname); };
 else if (argv.arecord)
-	action = function() { addARecord(dyn, argv.host, argv.arecord); };
+	action = function() { return addARecord(dyn, argv.host, argv.arecord); };
 else if (argv.delete)
-	action = function() { deleteRecord(client, argv.host); };
+	action = function() { return deleteRecord(dyn, argv.host); };
 
 loginAndAct(action);
 

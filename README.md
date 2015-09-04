@@ -1,6 +1,6 @@
 # dynector
 
-A command-line client for adding & removing single nodes to your DynECT host.
+A command-line client for adding & removing single nodes to your DynECT zone.
 
 ## Usage
 
