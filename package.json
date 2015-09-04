@@ -10,7 +10,7 @@
     "url": "https://github.com/npm/dynector/issues"
   },
   "dependencies": {
-    "dyn-js": "~1.0.3",
+    "dyn-js": "git://github.com/npm/dyn-js",
     "lodash": "~3.10.1",
     "yargs": "~3.23.0"
   },
