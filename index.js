@@ -6,22 +6,19 @@ var
 	chalk  = require('chalk'),
 	Dyn    = require('dyn-js'),
 	yargs  = require('yargs')
-		.usage('add and remove simple host records with Dyn DNS\n$0 --fqdn foo.example.com -a 10.0.0.11')
-		.option('fqdn',
-		{
-			alias: 'f',
-			describe: 'the fqdn you wish to operate on',
-			demand: true
-		})
+		.usage('add and remove simple host records with Dyn DNS\n$0 [action] fqdn.example.com')
+		.example('$0 -a 10.0.0.11 foo.example.com', 'add 10.0.0.11 as an A record for foo.example.com')
+		.example('$0 --cname bar.example.com foo.example.com', 'add bar.example.com as CNAME for foo.example.com')
+		.example('$0 --delete gone.example.com', 'remove all records for gone.example.com')
 		.option('cname',
 		{
 			alias: 'c',
-			describe: 'add a cname for this fqdn'
+			describe: 'add a cname to this fqdn'
 		})
 		.option('arecord',
 		{
 			alias: 'a',
-			describe: 'add an A record for this fqdn'
+			describe: 'add an A record to this fqdn'
 		})
 		.option('delete',
 		{
@@ -38,6 +35,7 @@ var
 			describe: 'do not log informationally',
 			type: 'boolean'
 		})
+		.demand(1)
 		.help('help')
 ;
 
