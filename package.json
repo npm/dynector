@@ -13,7 +13,7 @@
     "chalk": "~1.1.1",
     "dyn-js": "git://github.com/npm/dyn-js",
     "lodash": "~3.10.1",
-    "yargs": "~3.23.0"
+    "yargs": "~3.24.0"
   },
   "devDependencies": {
     "istanbul": "~0.3.19",
