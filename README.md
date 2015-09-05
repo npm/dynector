@@ -2,6 +2,8 @@
 
 A command-line client for adding & removing single nodes to your DynECT zone.
 
+[![on npm](http://img.shields.io/npm/v/dynector.svg?style=flat)](https://www.npmjs.org/package/dynector)  [![Tests](http://img.shields.io/travis/npm/dynector.svg?style=flat)](http://travis-ci.org/npm/dynector)  [![Dependencies](http://img.shields.io/david/npm/dynector.svg?style=flat)](https://david-dm.org/npm/dynector)
+
 ## Usage
 
 To run the tool you must set the following environment variables to your DynECT account credentials:
