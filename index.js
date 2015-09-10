@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var
-	_      = require('lodash'),
 	assert = require('assert'),
 	chalk  = require('chalk'),
 	Dyn    = require('dyn-js'),
