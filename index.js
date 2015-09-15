@@ -104,6 +104,7 @@ var determineZone = function determineZone(argv)
 if (require.main === module)
 {
 	argv = yargs.argv;
+	argv.fqdn = argv._[0];
 
 	if (!argv.d && !argv.c && !argv.a)
 	{
