@@ -22,7 +22,8 @@ var
 		.option('delete',
 		{
 			alias: 'd',
-			describe: 'remove this node entirely from Dyn'
+			describe: 'remove this node entirely from Dyn',
+			type: 'boolean'
 		})
 		.option('zone',
 		{
