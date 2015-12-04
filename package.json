@@ -12,7 +12,7 @@
   "dependencies": {
     "chalk": "~1.1.1",
     "dyn-js": "git://github.com/npm/dyn-js",
-    "yargs": "~3.29.0"
+    "yargs": "~3.31.0"
   },
   "devDependencies": {
     "eslint": "~1.10.1",
