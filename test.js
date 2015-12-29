@@ -5,7 +5,7 @@ var
 	demand   = require('must'),
 	sinon    = require('sinon'),
 	dynector = require('./index')
-;
+	;
 
 describe('dynector', function()
 {

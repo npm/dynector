@@ -37,7 +37,7 @@ var
 		})
 		.demand(1)
 		.help('help')
-;
+	;
 
 var argv = {}, dyn;
 
@@ -127,8 +127,7 @@ if (require.main === module)
 	}
 
 	var client = Dyn({
-		traffic:
-		{
+		traffic: {
 			customer_name: process.env.DYN_CUSTOMER,
 			user_name:     process.env.DYN_USER,
 			password:      process.env.DYN_PASSWORD
