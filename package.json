@@ -16,9 +16,9 @@
   },
   "devDependencies": {
     "eslint": "~1.10.3",
-    "istanbul": "~0.4.1",
     "mocha": "~2.4.2",
     "must": "~0.13.1",
+    "nyc": "~5.5.0",
     "sinon": "~1.17.2"
   },
   "homepage": "https://github.com/npm/dynector",
@@ -35,8 +35,8 @@
     "url": "git://github.com/npm/dynector.git"
   },
   "scripts": {
-    "coverage": "istanbul cover _mocha test.js --recursive -- -u exports -R spec && open coverage/lcov-report/index.html",
-    "test": "mocha -R spec test.js",
+    "coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95",
+    "test": "nyc mocha -R spec test.js",
     "lint": "eslint *.js",
     "travis": "npm run lint && npm test"
   }
