@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var
 	assert = require('assert'),
 	chalk  = require('chalk'),
@@ -35,6 +37,12 @@ var
 			describe: 'do not log informationally',
 			type: 'boolean'
 		})
+		.option('replace',
+		{
+			alias: 'r',
+			describe: 'remove, then add the record',
+			type: 'boolean'
+		})
 		.demand(1)
 		.help('help')
 	;
@@ -64,17 +72,19 @@ var deleteRecord = function deleteRecord(dyn, fqdn)
 	return dyn.node.destroy(fqdn, { rdata: { zone: fqdn }});
 };
 
-var loginAndAct = function loginAndAct(action)
+var loginAndAct = function loginAndAct(actions)
 {
 	dyn.session.create()
-	.then(function(r)
+	.then(function()
 	{
-		return action();
+		return Promise.all(actions.map(function(action)
+		{
+			return action();
+		}));
 	})
 	.then(function(result)
 	{
 		return dyn.zone.publish();
-
 	}).then(function(result)
 	{
 		return dyn.session.destroy();
@@ -135,15 +145,17 @@ if (require.main === module)
 	});
 	dyn = client.traffic.withZone(zone);
 
-	var action;
+	var actions = [];
+	if (argv.replace)
+		actions.push(function() { return deleteRecord(dyn, argv.fqdn); });
 	if (argv.cname)
-		action = function() { return addCName(dyn, argv.fqdn, argv.cname); };
+		actions.push(function() { return addCName(dyn, argv.fqdn, argv.cname); });
 	else if (argv.arecord)
-		action = function() { return addARecord(dyn, argv.fqdn, argv.arecord); };
+		actions.push(function() { return addARecord(dyn, argv.fqdn, argv.arecord); });
 	else if (argv.delete)
-		action = function() { return deleteRecord(dyn, argv.fqdn); };
+		actions.push(function() { return deleteRecord(dyn, argv.fqdn); });
 
-	loginAndAct(action);
+	loginAndAct(actions);
 }
 
 module.exports =
