@@ -10,7 +10,7 @@
     "url": "https://github.com/npm/dynector/issues"
   },
   "dependencies": {
-    "chalk": "~1.1.1",
+    "chalk": "~1.1.2",
     "dyn-js": "git://github.com/npm/dyn-js",
     "yargs": "~4.7.0"
   },
