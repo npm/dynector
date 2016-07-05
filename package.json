@@ -1,7 +1,7 @@
 {
   "name": "dynector",
   "description": "DynECT dns API command-line tool",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "C J Silverio <ceej@npmjs.com>",
   "bin": {
     "dynector": "index.js",
