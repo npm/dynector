@@ -2,7 +2,8 @@
 
 A command-line client for adding & removing single nodes to your DynECT zone.
 
-[![on npm](http://img.shields.io/npm/v/dynector.svg?style=flat)](https://www.npmjs.org/package/dynector)  [![Tests](http://img.shields.io/travis/npm/dynector.svg?style=flat)](http://travis-ci.org/npm/dynector)  [![Dependencies](http://img.shields.io/david/npm/dynector.svg?style=flat)](https://david-dm.org/npm/dynector)
+[![on npm](http://img.shields.io/npm/v/dynector.svg?style=flat)](https://www.npmjs.org/package/dynector)  [![Tests](http://img.shields.io/travis/npm/dynector.svg?style=flat)](http://travis-ci.org/npm/dynector)
+[![Coverage Status](https://coveralls.io/repos/github/npm/dynector/badge.svg?branch=master)](https://coveralls.io/github/npm/dynector?branch=master)
 
 ## Usage
 

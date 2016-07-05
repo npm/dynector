@@ -4,7 +4,8 @@
   "version": "1.1.0",
   "author": "C J Silverio <ceej@npmjs.com>",
   "bin": {
-    "dynector": "index.js"
+    "dynector": "index.js",
+    "dyn": "index.js"
   },
   "bugs": {
     "url": "https://github.com/npm/dynector/issues"
@@ -15,6 +16,7 @@
     "yargs": "~4.7.0"
   },
   "devDependencies": {
+    "coveralls": "~2.11.9",
     "eslint": "~3.0.1",
     "mocha": "~2.5.3",
     "must": "~0.13.1",
@@ -35,7 +37,7 @@
     "url": "git://github.com/npm/dynector.git"
   },
   "scripts": {
-    "coverage": "nyc check-coverage --lines 95 --functions 95 --branches 95",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc mocha -R spec test.js",
     "lint": "eslint *.js",
     "travis": "npm run lint && npm test"

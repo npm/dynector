@@ -8,9 +8,9 @@ var
 	Dyn    = require('dyn-js'),
 	yargs  = require('yargs')
 		.usage('add and remove simple host records with Dyn DNS\n$0 [action] fqdn.example.com')
-		.example('$0 -a 10.0.0.11 foo.example.com', 'add 10.0.0.11 as an A record for foo.example.com')
-		.example('$0 --cname bar.example.com foo.example.com', 'add bar.example.com as CNAME for foo.example.com')
-		.example('$0 --delete gone.example.com', 'remove all records for gone.example.com')
+		.example('dynector -a 10.0.0.11 foo.example.com', 'add 10.0.0.11 as an A record for foo.example.com')
+		.example('dynector --cname bar.example.com foo.example.com', 'add bar.example.com as CNAME for foo.example.com')
+		.example('dynector --delete gone.example.com', 'remove all records for gone.example.com')
 		.option('cname',
 		{
 			alias: 'c',
