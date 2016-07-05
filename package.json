@@ -18,7 +18,7 @@
     "eslint": "~3.0.1",
     "mocha": "~2.4.2",
     "must": "~0.13.1",
-    "nyc": "~6.4.1",
+    "nyc": "~6.6.1",
     "sinon": "~1.17.2"
   },
   "homepage": "https://github.com/npm/dynector",
