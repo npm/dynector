@@ -13,7 +13,7 @@
   "dependencies": {
     "chalk": "~1.1.2",
     "dyn-js": "git://github.com/npm/dyn-js",
-    "yargs": "~4.7.0"
+    "yargs": "~5.0.0"
   },
   "devDependencies": {
     "coveralls": "~2.11.9",
