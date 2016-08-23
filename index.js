@@ -124,8 +124,8 @@ if (require.main === module)
 	}
 
 	assert(process.env.DYN_CUSTOMER, 'you must set your dyn customer in the DYN_CUSTOMER env var');
-	assert(process.env.DYN_USER, 'you must set your dyn username in the DYN_CUSTOMER env var');
-	assert(process.env.DYN_PASSWORD, 'you must set your dyn password in the DYN_CUSTOMER env var');
+	assert(process.env.DYN_USER, 'you must set your dyn username in the DYN_USER env var');
+	assert(process.env.DYN_PASSWORD, 'you must set your dyn password in the DYN_PASSWORD env var');
 
 	var zone = determineZone(argv);
 	logit('operating on zone ' + zone);
