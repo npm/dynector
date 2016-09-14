@@ -11,24 +11,27 @@ var yargs = require('yargs')
 	{
 		alias: 'z',
 		description: 'specify a zone',
+		global: true
 	})
 	.option('replace',
 	{
 		alias: 'r',
 		describe: 'remove the node before acting',
-		type: 'boolean'
+		type: 'boolean',
+		global: true
 	})
 	.option('silent',
 	{
 		describe: 'do not log informationally',
-		type: 'boolean'
+		type: 'boolean',
+		global: true
 	})
-	.example('dynector arecord example.com 10.0.0.1')
-	.example('dynector cname www.example.com example.com')
-	.example('dynector cname oops.example.com example.com')
-	.example('dynector delete oops.example.com')
-	.example('dynector list example.com')
-	.example('dynector resolve example.com')
+	.example('dynector arecord example.com 10.0.0.1', 'make example.com resolve to 10.0.0.1')
+	.example('dynector cname www.example.com example.com', 'make www.example.com resolve to example.com')
+	.example('dynector cname oops.example.com example.com', 'make oops resolve to example.com')
+	.example('dynector delete oops.example.com', 'remove the entry for oops entirely')
+	.example('dynector list example.com', 'list all records under example.com')
+	.example('dynector resolve example.com', 'resolve IPs for all example.com records')
 	.version()
 	.help()
 	;
