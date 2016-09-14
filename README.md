@@ -47,8 +47,8 @@ Options:
 
 Examples:
   dynector arecord example.com 10.0.0.1
-  dynector cname example.com www.example.com
-  dynector cname example.com oops.example.com
+  dynector cname www.example.com example.com
+  dynector cname oops.example.com example.com
   dynector delete oops.example.com
   dynector list example.com
   dynector resolve example.com
