@@ -42,4 +42,6 @@ yargs.command(require('./commands/delete.js'));
 yargs.command(require('./commands/list.js'));
 yargs.command(require('./commands/resolve.js'));
 
+yargs.recommendCommands();
+
 yargs.argv;
