@@ -15,25 +15,43 @@ DYN_USER
 DYN_PASSWORD
 ```
 
-`dynector -a 10.0.0.11 foo.example.com`: add the A record `10.0.0.11` to foo.example.com
+The commands offered are:
 
-`dynector --cname bar.example.com foo.example.com`: add the CNAME record `bar.example.com` to foo.example.com
+`dynector arecord foo.example.com 10.0.0.11`: add the A record `10.0.0.11` to foo.example.com, so that foo.example.com will resolve to 10.0.0.11
 
-`dynector --delete gone.example.com`: remove all records for gone.example.com
+`dynector cname foo.example.com bar.example.com`: add `bar.example.com` as a CNAME for foo.example.com, so that bar will resolve to foo, which is resolved elsewhere.
 
-Options:
+`dynector delete gone.example.com`: remove all records for gone.example.com
+
+`dynector list example.com`: list all records dynect has for the given zone, with types
+
+`dynector resolve example.com`: resolve all records for the given zone & return a sorted list of IPs in use
+
+Usage:
 
 ```
-add and remove simple host records with Dyn DNS
-index.js [action] fqdn.example.com
+dynector: conveniences for interacting with the dynect API
+
+Commands:
+  arecord <fqdn> <ip>   make the given fqdn resolve to the given IP
+  cname <fqdn> <cname>  make the given fqdn resolve to the given cname
+  delete <fqdn>         remove the named node entirely
+  list <zone>           list all records for the given zone
+  resolve <zone>        resolve all records for the given zone; list the IPs
 
 Options:
-  --cname, -c    add a cname to this fqdn
-  --arecord, -a  add an A record to this fqdn
-  --delete, -d   remove this node entirely from Dyn
-  --zone, -z     the Dyn zone to act on; will be deduced from the fqdn if not provided
-  --silent       do not log informationally                            [boolean]
+  --zone, -z     specify a zone
+  --replace, -r  remove, then add the record                           [boolean]
+  --version      Show version number                                   [boolean]
   --help         Show help                                             [boolean]
+
+Examples:
+  dynector arecord example.com 10.0.0.1
+  dynector cname www.example.com example.com
+  dynector cname oops.example.com example.com
+  dynector delete oops.example.com
+  dynector list example.com
+  dynector resolve example.com
 ```
 
 ## License

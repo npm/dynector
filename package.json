@@ -4,15 +4,17 @@
   "version": "1.1.2",
   "author": "C J Silverio <ceej@npmjs.com>",
   "bin": {
-    "dynector": "index.js",
-    "dyn": "index.js"
+    "dynector": "cli.js",
+    "dyn": "cli.js"
   },
   "bugs": {
     "url": "https://github.com/npm/dynector/issues"
   },
   "dependencies": {
+    "bluebird": "~3.4.6",
     "chalk": "~1.1.2",
     "dyn-js": "git://github.com/npm/dyn-js",
+    "update-notifier": "~1.0.2",
     "yargs": "~5.0.0"
   },
   "devDependencies": {
@@ -31,7 +33,7 @@
     "cli tool"
   ],
   "license": "ISC",
-  "main": "index.js",
+  "main": "cli.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/npm/dynector.git"
@@ -39,7 +41,7 @@
   "scripts": {
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "test": "nyc mocha -R spec test.js",
-    "lint": "eslint *.js",
+    "lint": "eslint .",
     "travis": "npm run lint && npm test"
   }
 }
