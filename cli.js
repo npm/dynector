@@ -41,6 +41,7 @@ yargs.command(require('./commands/cname.js'));
 yargs.command(require('./commands/delete.js'));
 yargs.command(require('./commands/list.js'));
 yargs.command(require('./commands/resolve.js'));
+yargs.command(require('./commands/cnames.js'));
 
 yargs.recommendCommands();
 
