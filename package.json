@@ -15,7 +15,7 @@
     "chalk": "~1.1.2",
     "dyn-js": "git://github.com/npm/dyn-js",
     "update-notifier": "~1.0.2",
-    "yargs": "~5.0.0"
+    "yargs": "~6.3.0"
   },
   "devDependencies": {
     "coveralls": "~2.11.13",
