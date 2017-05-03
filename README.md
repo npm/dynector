@@ -1,5 +1,7 @@
 # dynector
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/npm/dynector.svg)](https://greenkeeper.io/)
+
 A command-line client for adding & removing single nodes to your DynECT zone.
 
 [![on npm](http://img.shields.io/npm/v/dynector.svg?style=flat)](https://www.npmjs.org/package/dynector)  [![Tests](http://img.shields.io/travis/npm/dynector.svg?style=flat)](http://travis-ci.org/npm/dynector)
