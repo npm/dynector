@@ -20,9 +20,9 @@
   "devDependencies": {
     "coveralls": "~2.13.1",
     "eslint": "~3.19.0",
-    "mocha": "~3.3.0",
+    "mocha": "~3.4.2",
     "must": "~0.13.2",
-    "nyc": "~10.3.0",
+    "nyc": "~11.0.1",
     "sinon": "~2.3.2"
   },
   "homepage": "https://github.com/npm/dynector",
