@@ -14,7 +14,7 @@
     "bluebird": "~3.5.0",
     "chalk": "~1.1.2",
     "dyn-js": "git://github.com/npm/dyn-js",
-    "update-notifier": "~2.1.0",
+    "update-notifier": "~2.5.0",
     "yargs": "~8.0.1"
   },
   "devDependencies": {
