@@ -1,7 +1,7 @@
 {
   "name": "dynector",
   "description": "DynECT dns API command-line tool",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "author": "C J Silverio <ceej@npmjs.com>",
   "bin": {
     "dynector": "cli.js",
@@ -13,7 +13,7 @@
   "dependencies": {
     "bluebird": "~3.5.0",
     "chalk": "~1.1.2",
-    "dyn-js": "git://github.com/npm/dyn-js",
+    "dyn-js": "https://github.com/npm/dyn-js.git",
     "update-notifier": "~2.1.0",
     "yargs": "~8.0.1"
   },
